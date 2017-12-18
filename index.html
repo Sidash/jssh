@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <script src="./game.js"></script>
+    <title>SHitler - Pass it around version</title>
+
+</head>
+<body onload="initSetup()">
+
+<div id="setup" class="dialogue">
+    <h1>Setup</h1>
+    <p>Enter the player names down below.</p>
+    <div>
+        <button onclick="addPlayer()" type="submit" class="rect">+</button>
+        <button onclick="rmPlayer()" type="submit" class="rect">-</button>
+        <button onclick="activateDialogue('pref-welcome')" type="submit float_right" class="rect">p</button>
+    </div>
+    <div id="preference-msg"></div>
+     <form action="javascript:setPlayers()">
+        <div id="players-setup"></div>
+        <p id="setup-msg"></p>
+        <button type="submit" class="fullsize big float_right">gogogo</button>
+     </form>
+     <div class="clearfix"></div>
+     <pre id="log"></pre>
+     <h2>credits and license</h2>
+<p><a href="http://www.secrethitler.com">Secret Hitler</a> was created by Mike Boxleiter, Tommy Maranges, Max Temkin, and Mac Schubert. Secret Hitler is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. </p>
+</div>
+
+<div id="preferences" class="dialogue">
+
+    <h1>Preferences</h1>
+    <div id="pref-welcome" class="dialogue">
+        <p>Enter your player name down below to set your preferred role.</p>
+        <form action="#">
+            <input id="pref-name" type="text">
+        </form>
+        <button onclick="activateDialogue('setup')" class="halfsize big">back</button>
+        <button onclick="activateDialogue('pref-set')" class="halfsize float_right big">set</button>
+    </div>
+
+    <div id="pref-set" class="dialogue">
+        <p>Select your preferred role. This option will stay set until you reload the page or unset it again.</p>
+        <p>It will be more likely for you to be the role you select in the next game. However it is not impossible to have a different role.</p>
+        <button onclick="setPreferred('L')" class="rect">L</button>
+        <button onclick="setPreferred('H')" class="rect">H</button>
+        <button onclick="setPreferred('F')" class="rect">F</button>
+        <button onclick="setPreferred('')" class="rect">?</button>
+    </div>
+</div>
+
+<div id="pregame" class="dialogue">
+    <h1>information</h1>
+    <p>You are playing with <span id="pg-playerno"></span> players.</p>
+    <p>There are <span id="pg-fascistno"></span> fascists and <span id="pg-liberalno"></span> liberals</p>
+    <p>Hitler does <span id ="pg-hknows"></span> know who his co-fascists are.</p>
+    <button onclick="showRole(0)" class="halfsize" type="submit">continue</button>
+
+</div>
+
+<div id="roles" class="dialogue">
+    <div id="roles-warning" class="dialogue">
+        <h1>warning</h1>
+        <div id="roles-warning-msg"></div>
+
+        <button onclick="activateDialogue('roles-show')" class="halfsize" type="submit">show</button>
+    </div>
+    <div id="roles-show" class="dialogue">
+        <h1>secret role</h1>
+        <div id="roles-show-msg"></div>
+
+        <button id="roles-show-hide" class="halfsize" type="submit">hide</button>
+    </div>
+</div>
+<div id="game" class="dialogue">
+    <div id="game-state">
+        <div id="board">
+            <div class="pile-label">draw</div>
+            <div class="pile-label">discard</div>
+            <div class="pile-label">failed</div>
+            <div class="clearfix"></div>
+            <a href="javascript:enactPolicy()">
+                <div class="pile">
+                    <span id="draw-pile-no">17</span>
+                </div>
+            </a>
+            <div class="pile">
+                
+                <span id="discard-pile-no">0</span>
+            </div>
+            <a href="javascript:failedElection()">
+            <div class="tracker">
+                
+                <span id="failed-elect-no">0</span>
+            </div>
+            </a>
+
+
+            <div class="clearfix"></div>
+            fascist track
+            <div id="fascist-track" class="track">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="clearfix"></div>
+            liberal track
+            <div id="liberal-track" class="track">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <div id="stack"></div>
+    </div>
+    <div id="game-msg"></div>
+    <div class="vspace"></div>
+
+    <button onclick="activateDialogue('restart')" class="halfsize" type="submit">restart</button>
+</div>
+
+
+<div id="restart" class="dialogue">
+    <h1>restart</h1>
+    <p>Do you really want to restart the game? All progress will be lost</p>
+    <button onclick="activateDialogue('reveal')" class="halfsize" type="submit">ja!</button>
+    <button onclick="activateDialogue('game')" class="halfsize" type="submit">nein!</button>
+</div>
+
+<div id="reveal" class="dialogue">
+    <h1>reveal</h1>
+    <p>Click to reveal the roles.</p>
+
+    <button onclick="activateDialogue('setup')" class="halfsize" type="submit">restart</button>
+    <button onclick="reveal()" class="halfsize" type="submit">reveal</button>
+    <div id="reveal-roles" class="dialogue">
+        <ul id="reveal-list"></ul>
+    </div>
+    
+</div>
+
+<div id="enact" class="dialogue">
+    <h1>enact policy</h1>
+    <div id="enact-warning-president" class="dialogue">
+        <p>Continue only if you are the president. You are about to draw three cards from the card stack.</p>
+
+        <button onclick="activateDialogue('game')" class="halfsize" type="submit">back</button>
+        <button onclick="drawCards()" class="halfsize" type="submit">draw</button>
+    </div>
+    <div id="enact-cards-president" class="dialogue">
+        <p>Select a policy to discard:</p>
+        <div id="container-cards-president"></div>
+    </div>
+    <div id="enact-warning-chancellor" class="dialogue">
+        <p>Please give the device to your chancellor. If you are the chancelor, continue.</p>
+        <button onclick="activateDialogue('enact-cards-chancellor')">show</button>
+    </div>
+    <div id="enact-cards-chancellor" class="dialogue">
+        <p>Select a policy to enact:</p>
+        <div id="container-cards-chancellor"></div>
+        <button id="veto-power" onclick="activateDialogue('check-veto-warning')">veto this agenda</button>
+    </div>
+</div>
+
+<div id="check-veto" class="dialogue">
+    <div id="check-veto-warning" class="dialogue">
+        <h1>check for veto</h1>
+        <p>The Veto Power is a special rule that comes into
+effect after five Fascist Policies have been
+enacted. For all Legislative Sessions after the
+fifth Fascist Policy is enacted, the Executive
+branch gains a permanent new ability to discard
+all three Policy tiles if both the Chancellor
+and President agree.</p>
+<p>You may,instead of enacting either Policy, say “I wish
+to veto this agenda.” If the President consents
+by saying, "I agree to the veto," both Policies
+are discarded and the President placard passes to the left as usuak</p>
+<p>Each use of the Veto Power represents an
+inactive government and advances the Election
+Tracker by one.</p>
+        <button onclick="activateDialogue('enact-cards-chancellor')">back</button>
+        <button onclick="vetoPolicy()">veto this agenda</button>
+    </div>
+    <div id="veto-success" class="dialogue">
+        <h1>veto successful</h1>
+        <p>The policies were discarded</p>
+        <button onclick="activateDialogue('game')">back</button>
+    </div>
+</div>
+
+<div id="liberal-enacted" class="dialogue">
+    <h1>liberal policy enacted</h1>
+    <p>a liberal policy has been enacted.</p>
+
+        <button onclick="activateDialogue('game')" class="halfsize" type="submit">continue</button>
+</div>
+
+<div id="fascist-enacted" class="dialogue">
+    <h1>fascist policy enacted</h1>
+    <p>a fascist policy has been enacted.</p>
+    <button onclick="activateDialogue('game')" class="halfsize" type="submit">continue</button>
+</div>
+
+<div id="executive-execute" class="dialogue">
+    <h1>Execution</h1>
+    <p>The President executes one player
+ at the table by saying "I formally
+ execute [player name]." If that
+ player is Hitler, the game ends in
+ a Liberal victory. If the executed
+ player is not Hitler, the table
+ should not learn whether a Fascist or
+ a Liberal has been killed; players
+ must try to work out for themselves
+ the new table balance. Executed
+ players are removed from the game and
+ may not speak, vote, or run
+ for office.</p>
+
+    <button onclick="activateDialogue('game')" class="halfsize" type="submit">continue</button>
+</div>
+
+<div id="executive-execute-veto" class="dialogue">
+    <h1>Execution and veto power</h1>
+    <p>The President executes one player
+ at the table by saying “I formally
+ execute [player name].” If that
+ player is Hitler, the game ends in
+ a Liberal victory. If the executed
+ player is not Hitler, the table
+ should not learn whether a Fascist or
+ a Liberal has been killed; players
+ must try to work out for themselves
+ the new table balance. Executed
+ players are removed from the game and
+ may not speak, vote, or run
+ for office.</p>
+ <p>The Veto Power is a special rule that comes into
+effect after five Fascist Policies have been
+enacted. For all Legislative Sessions after the
+fifth Fascist Policy is enacted, the Executive
+branch gains a permanent new ability to discard
+all three Policy tiles if both the Chancellor
+and President agree.</p>
+<p>Each use of the Veto Power represents an
+inactive government and advances the Election
+Tracker by one.
+</p>
+
+    <button onclick="activateDialogue('game')" class="halfsize" type="submit">continue</button>
+</div>
+
+ <div id="executive-action" class="dialogue">
+     <h1>executive action</h1>
+ </div>
+
+<div id="view-next-draw" class="dialogue">
+    <h1>policy peak</h1>
+    <div id="view-draw-warning" class="dialogue">
+        <p>Please give the device to your president. If you are the president, continue.</p>
+        <p>The President secretly looks at the top three tiles in the Policy deck and then returns them to the top of thedeck without changing the order. 
+        </p>
+        <div class="vspace"></div>
+
+         <button onclick="activateDialogue('view-draw-show')" class="halfsize" type="submit">show</button>
+
+    </div>
+    <div id="view-draw-show" class="dialogue">
+        The next three cards are
+        <div id="container-cards-next"></div>
+
+        <button onclick="activateDialogue('game')" class="halfsize" type="submit">continue</button>
+    </div>
+</div>
+
+<div id="special-election" class="dialogue">
+    <h1>special election</h1>
+    <p> The President chooses any other
+ player at the table to be the next
+ Presidential Candidate by passing
+ that player the President placard.
+ Any player can become President—even
+ players that are term-limited. The
+ new President nominates an eligible
+ player as Chancellor Candidate and
+ the Election proceeds as usual.</p>
+ <p>
+ A Special Election does not skip any
+ players. After a Special Election,
+ the President placard returns to the
+ left of the President who enacted the
+ Special Election.</p>
+    <button onclick="activateDialogue('game')" class="halfsize" type="submit">continue</button>
+</div>
+
+<div id="executive-invest" class="dialogue">
+    <h1>investigate</h1>
+    <div id="invest-warning" class="dialogue">
+        <p>The President chooses a player to investigate.</p> 
+        <p>Give the device to the president. if you are the president, continue.</p>
+         <button onclick="activateDialogue('invest-select')" class="halfsize" type="submit">continue</button>
+    </div>
+    <div id="invest-select" class="dialogue">
+        <p>Select someone to investigate. You may share (or lie about!) the
+results of your investigation at
+your discretion.</p>
+        <div id="player-invest-container"></div>
+    </div>
+    <div id="invest-show" class="dialogue">
+        <div id="player-invest-id"></div>
+        <button onclick="activateDialogue('game')" class="halfsize" type="submit">continue</button>
+    </div>
+</div>
+
+<div id="fascists-win" class="dialogue">
+    <h1>fascists win</h1>
+    <p>Fascists win by enacting the 6th fascist policy.</p>
+    
+    <button onclick="activateDialogue('restart')" class="halfsize" type="submit">restart</button>
+</div>
+
+<div id="liberals-win" class="dialogue">
+    <h1>liberals win</h1>
+    <p>Liberals win by enacting the 5th liberal policy.</p>
+
+    <button onclick="activateDialogue('restart')" class="halfsize" type="submit">restart</button>
+</div>
+
+<div id="3-failed-elect" class="dialogue">
+    <h1>3 failed elections</h1>
+    <p>If the group rejects three governments in a row, the country is thrown into chaos. Immediately reveal the Policy on top of
+the Policy deck and enact it. Any power granted by this Policy is ignored, but the Election Tracker resets, and existing term-limits are
+forgotten. All players become eligible to hold the office of Chancellor for the next Election.</p>
+ 
+    <button onclick="activateDialogue('game')" class="halfsize" type="submit">back</button>
+    <button onclick="flipCard()" class="halfsize" type="submit">flip card</button>
+
+</div>
+
+
+
+</body>
+
+
+</html>

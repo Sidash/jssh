@@ -1,0 +1,622 @@
+
+@media (max-width: 699px) and (min-width: 520px) {
+      @viewport {
+              width: 640px;
+                }
+            }
+
+html {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    font-family: Courier, "Courier",serif;
+    font-weight: 300;
+    padding: 0;
+    margin: 0;
+    background-color: #b9a992;
+}
+
+button {
+    height: 30px;
+    font-size: 1em;
+    color: white;
+    border-radius: 10px;
+    border-top: 2px solid #fe6a4f;
+    border-left: 2px solid #fe6a4f;
+    border-bottom: 2px solid #d75a43;
+    border-right: 2px solid #d75a43;
+    background-color: #f0654b;
+    margin:5px;
+    margin-left:0px;
+    margin-right:10px;
+}
+
+.fac-ident{
+    border: 10px solid #f0654b;
+    background-color: #f0654b;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+}
+
+.lib-ident{
+    border: 10px solid #78cad7;
+    background-color: #78cad7;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+}
+
+.card-fac {
+    background-color: #f0654b;
+    color: black;
+}
+
+.card-lib {
+    background-color: #78cad7; 
+    color: black;
+}
+
+.vspace {
+    height: 100px;
+}
+
+.track div, .pile, .tracker{
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    background-color: #867b69;
+    border: 5px solid  #867b69;
+    border-radius: 10px;
+}
+
+.pile-label{
+    float: left;
+    text-align: center;
+    width: 80px;
+}
+
+.pile{
+    background-color: #f7e1c3;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pile, .pile-label, .tracker {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: black;
+}
+
+.pile, .tracker {
+    font-size: 1.5em;
+    padding-top: 15px;
+    height: 55px;
+}
+
+
+.tracker {
+    background-color: #f0654b;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.track div:first-child{
+    clear: left;
+}
+
+.track div:last-child{
+    clear: right;
+}
+
+#draw-pile{
+    background-color: greyl
+}
+
+#fascist-track div.enabled {
+    background-color: #f0654b !important;
+}
+
+#fascist-track div:nth-child(n+4) {
+    background-color: #564f43;
+    border-color: #564f43;
+}
+
+#liberal-track div.enabled {
+    background-color: #78cad7 !important;
+}
+
+
+.fullsize {
+    width: 100%;
+    text-align: center;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.big {
+    height:3em;
+
+}
+
+.halfsize {
+    width: 45%;
+    text-align: center;
+}
+
+.rect {
+    width: 50px;
+    height: 50px;
+}
+
+
+div > ul {
+    padding-left: 0px;
+    list-style-type: none;
+
+}
+
+div > ul > li:before {
+    content: "﹅ ";
+    content: "￭ ";
+    content: "➥ ";
+    font-size: 1em;
+}
+
+
+body >div {
+    margin: auto;
+    max-width: 800px;
+    padding: 15px; 
+    font-size: 120%;
+}
+
+body nav {
+    max-width: none;
+    width: 100%;
+    margin: auto;
+    border-bottom: 3px solid #48c;
+    border-top: 3px solid #48c;
+    background-color: grey;
+    padding-top: 400px;
+    background-size: cover;
+    background-image: url(shanghai.jpg);
+    text-align: center;
+}
+
+body div.spacer {
+    max-width: none;
+    padding: 0;
+    width: 100%;
+    margin: auto;
+    border-bottom: 3px solid #48c;
+    border-top: 3px solid #48c;
+    background-color: grey;
+    height: 500px;
+    background-image: url(backdrop.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+div.sub{
+    padding: 0;
+    max-width: none;
+    background-color: #000;
+    width: 100%;
+
+}
+
+nav ul {
+    margin: auto;
+    vertical-align: center;
+}
+
+nav ul li {
+    display:table-cell; padding: 0px 10px;
+    margin: auto;
+    display: inline-block;
+    background: #48c;
+    color: white;
+    min-width: 110px;
+
+}
+
+nav ul li a {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: block; 
+    padding-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li a:hover{
+    color: #666;
+
+}
+
+@media only screen and (max-device-width: 480px) {
+    body nav {
+        background-attachment: scroll;
+        padding-top: 0;
+        padding-top: 100px;
+        background-size: 100%;
+    }
+
+}
+
+nav ul li:before{
+    content: "";
+}
+
+nav ul li:hover{
+    background: white;
+    color: #48c;
+}
+
+ul.tagmap li{
+    display: inline-block;
+    margin: 5px;
+    padding: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+}
+
+ul.tagmap li:before{
+    content: "";
+}
+
+div.header {
+    border-top-right-radius: 15px;
+    margin-top: 10px;
+    vertical-align: middle;
+}
+
+
+div.header img {
+    margin: 0;
+    margin-right: 10px;
+}
+
+div.footer {
+    font-size: 100%;
+    max-width: none;
+    margin: 0;
+    margin-top: 20px;
+    text-align: right;
+    border: 0px;
+    border-top: 3px solid #48c;
+    background-color: #ddd;
+    overflow: auto;
+}
+
+div.bottom {
+    max-width: none;
+    background-color: #222;
+    font-size: 100%;
+    overflow: auto;
+    color: #999;
+    padding-left: 25%;
+    padding-bottom: 50px;
+    border: none;
+
+}
+
+div.bottom a {
+    color: #999;
+}
+
+address {
+    font-style: normal;
+}
+
+
+
+
+div.contact {
+    max-width: none;
+    background-color: #333;
+    font-size: 100%;
+    overflow: auto;
+    color: #999;
+    padding-left: 25%;
+    border: none;
+}
+
+div.contact a {
+    color: #999;
+}
+
+a.btt {
+    float: right;
+    font-style: normal;
+    text-decoration: none;
+    color: #999;
+
+}
+
+a.btt:after{
+    content:" ⬆︎ ";
+}
+
+h1 {
+     /*font: normal 2em/1.1 OFL Sorts Mill Goudy, Georgia, serif;*/
+    font-family: "futura-pt", Futura, sans-serif;
+    font-weight: 800;
+    font-size: 200%;
+    margin: 0;
+    text-align:center;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+
+h1 a {
+    color: black;
+    text-decoration: none;
+}
+
+h2 {
+    font-family: Courier, "Courier",serif;
+    font-weight: 300;
+    font-size: 150%;
+    margin-bottom: 0.5em;
+}
+
+h2 img, h3 img, h4 img{
+    vertical-align: middle;
+
+}
+
+h3 {
+    margin-bottom: 5px;
+    font-family: Courier, "Courier",serif;
+    font-weight: 300;
+}
+
+h4 {
+    margin-bottom: 5px;
+    font-family: Courier, "Courier",serif;
+    font-weight: 300;
+}
+
+p {
+   /* margin-left:20px;*/
+}
+
+td {
+    padding-right: 2em;
+}
+
+table.cvtable tr>td:first-child{
+    color: #999;
+    white-space: nowrap;
+    vertical-align: top;
+}
+table.cvtable tr:nth-child(odd)>td:nth-child(2){
+    font-weight: bold;
+}
+
+table.cvtable-cat tr>td:first-child,table.cvtable-cat tr>td:nth-child(3){
+    color: #999;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+table tr.thead {
+    font-weight: bold;
+}
+
+
+table tr.thead:not(:first-child) td {
+    padding-top: 2em;
+}
+
+table tr:last-child td {
+    padding-bottom: 2em;
+}
+
+
+
+q {
+    font-size: 2em;
+    text-align: center;
+    width: 100%;
+}
+
+
+
+q:before {
+    content: "❝ ";
+    font-size: 1.5em;
+}
+
+q:after {
+    content: " ❞";
+    font-size: 1.5em;
+}
+
+pre {
+    color: #f15133;
+    /*color: #eee;*/
+    color: #cc5e84;
+    margin-left: 0px;
+    margin-right: 0px;
+    /*white-space:pre-wrap;
+    word-wrap:break-word;*/
+    overflow: scroll;
+    padding: 15px;
+}
+
+
+input[type="radio"] {
+    margin-left: 10px;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid #999;
+    padding: 5px;
+    padding-left: 15px;
+    font-size: 1em;
+    background-color: #564f43;
+    color: white;
+}
+
+.source {
+    margin-top: 100px;
+    text-align: right;
+    color: #A0A0A0;
+    font-size: 0.8em;
+}
+
+.navlink {
+    color: #666;
+    text-decoration: none;
+}
+
+img {
+    margin: 20px;
+    width:50%;
+}
+
+img.card {
+    width: 25%;
+}
+
+img.inline {
+    margin: 0;
+    margin-right: 5px
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.right {
+    display: block;
+    margin-left: auto;
+}
+
+
+button.float_right{
+    margin-right: 0px;
+    margin-left: 10px;
+}
+
+.float_right {
+    float: right;
+}
+
+.float_left {
+    float: left;
+}
+
+.profile {
+    width: 25%;
+
+}
+
+
+
+.left_image {
+    margin-left: -130px;
+    margin-top: -50px;
+    width: 100px;
+}
+
+.pixelate {
+    image-rendering: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges; 
+    image-rendering: pixelated;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+}
+
+a {
+word-wrap: break-word;
+color: #48c;
+}
+
+@media (max-width: 720px) {
+    tr td {
+        display: block;
+    }
+
+    .cvtable-cat tr td{
+        display: table-cell;
+        margin: 0;
+        padding-right: 0.25em;
+        padding-bottom: 0;
+        /*vertical-align: top;*/
+    }
+
+    .cvtable-cat tr td:not(:nth-child(n+3)){
+        display: block;
+    }
+
+    .cvtable-cat tr:not(.thead) td:nth-child(2){
+        text-align: right;
+    }
+
+    table tr:last-child td:not(:last-child) {
+        padding-bottom: initial;
+    }
+
+    nav ul li {
+        width: 100%;
+        margin: 0px;
+        margin-top: 2px;
+        margin-bottom: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    nav ul {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    body nav {
+        background-image: none;
+        background-color: #005;
+        padding: 0px;
+        width: 100%;
+        padding-bottom: 2px;
+    }
+
+
+    body div.spacer{
+        height: 250px;
+        background-color: grey;
+        background-width: 100%;
+        background-repeat: no-repeat;
+        background-attachment: scroll; 
+    }
+    
+    .profile {
+        width: 35%;
+
+    }
+}
+
+.clearfix{
+    clear: both;
+}
